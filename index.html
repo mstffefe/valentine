@@ -122,21 +122,35 @@ const yesTexts = [
 const noTexts = [
   "hyr",
   "dur",
-  "yapma",
-  "hala mı"
+  "hala mı",
+  "yapma"
 ];
 
 let yesIndex = 0;
 let noIndex = 0;
 
+// SAYFA AÇILINCA İLK METİNLER
+yesBtn.innerText = yesTexts[0];
+noBtn.innerText = noTexts[0];
+
+
 noBtn.addEventListener("click", () => {
-  noIndex = Math.min(noIndex + 1, noTexts.length - 1);
-  yesIndex = Math.min(yesIndex + 1, yesTexts.length - 1);
+  if (noIndex < noTexts.length - 1) {
+    noIndex++;
+    yesIndex++;
 
-  noBtn.innerText = noTexts[noIndex];
-  yesBtn.innerText = yesTexts[yesIndex];
+    noBtn.innerText = noTexts[noIndex];
+    yesBtn.innerText = yesTexts[yesIndex];
 
-  yesBtn.style.transform = `scale(${1 + yesIndex * 0.3})`;
+    yesBtn.style.transform = `scale(${1 + yesIndex * 0.3})`;
+    createHeart();
+  }
+
+  if (noIndex === noTexts.length - 1) {
+    noBtn.style.display = "none";
+    yesBtn.innerText = "EVET ❤️";
+    yesBtn.style.transform = "scale(2)";
+  }
 });
 
 yesBtn.addEventListener("click", () => {
@@ -148,21 +162,22 @@ yesBtn.addEventListener("click", () => {
 });
 
 function createHeart() {
-    const heart = document.createElement("div");
-    heart.innerHTML = "❤️";
-    heart.style.position = "absolute";
-    heart.style.left = Math.random() * window.innerWidth + "px";
-    heart.style.bottom = "0px";
-    heart.style.fontSize = "24px";
-    heart.style.animation = "floatUp 3s linear forwards";
-    document.body.appendChild(heart);
+  const heart = document.createElement("div");
+  heart.innerHTML = "❤️";
+  heart.style.position = "fixed";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.bottom = "0px";
+  heart.style.fontSize = "24px";
+  heart.style.animation = "floatUp 3s linear forwards";
+  document.body.appendChild(heart);
 
-    setTimeout(() => heart.remove(), 3000);
+  setTimeout(() => heart.remove(), 3000);
 }
 </script>
 
 </body>
 </html>
+
 
 
 
