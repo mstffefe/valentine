@@ -109,28 +109,43 @@ button {
 </div>
 
 <script>
-let yesSize = 20;
-let noClicks = 0;
+const yesBtn = document.getElementById("yes");
+const noBtn = document.getElementById("no");
 
-function noClicked() {
-    noClicks++;
-    yesSize += 10;
-    document.getElementById("yes").style.fontSize = yesSize + "px";
-    createHeart();
+const yesTexts = [
+  "MY VALENTINE",
+  "evt askim",
+  "EVET",
+  "EVEETTT"
+];
 
-    if (noClicks >= 5) {
-        document.getElementById("no").style.display = "none";
-    }
-}
+const noTexts = [
+  "hyr",
+  "dur",
+  "yapma",
+  "hala mı"
+];
 
-function yesClicked() {
-    document.body.innerHTML = `
-        <div style="text-align:center; color:white;">
-            <h1>💖 Askiummm! 💖</h1>
-            <p>Tesekkur Ederim 🥰</p>
-        </div>
-    `;
-}
+let yesIndex = 0;
+let noIndex = 0;
+
+noBtn.addEventListener("click", () => {
+  noIndex = Math.min(noIndex + 1, noTexts.length - 1);
+  yesIndex = Math.min(yesIndex + 1, yesTexts.length - 1);
+
+  noBtn.innerText = noTexts[noIndex];
+  yesBtn.innerText = yesTexts[yesIndex];
+
+  yesBtn.style.transform = `scale(${1 + yesIndex * 0.3})`;
+});
+
+yesBtn.addEventListener("click", () => {
+  document.body.innerHTML = `
+    <div style="display:flex;justify-content:center;align-items:center;height:100vh;text-align:center;">
+      <h1>ASKIUMM 💖</h1>
+    </div>
+  `;
+});
 
 function createHeart() {
     const heart = document.createElement("div");
@@ -148,6 +163,7 @@ function createHeart() {
 
 </body>
 </html>
+
 
 
 
