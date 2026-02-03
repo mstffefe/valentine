@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Valentine</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: "Cooper Black", "CooperBlackStd", "Comic Sans MS", cursive;
+    background: #5a0f14;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.container {
+    text-align: center;
+    background: #fffdf8;
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+    z-index: 2;
+    max-width: 90vw;
+}
+
+img.main-photo {
+    width: 230px;
+    border-radius: 15px;
+    margin-bottom: 15px;
+}
+
+h1 {
+    font-weight: normal;
+    margin-bottom: 20px;
+}
+
+.buttons {
+    margin-top: 15px;
+}
+
+button {
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    background: white;
+}
+
+#yes {
+    font-size: 20px;
+    padding: 10px 25px;
+    margin-right: 10px;
+}
+
+#no {
+    font-size: 20px;
+    padding: 10px 25px;
+}
+
+/* Stickers */
+.flowers {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    opacity: 0.9;
+}
+
+.love {
+    position: absolute;
+    left: 20px;
+    bottom: 20px;
+    width: 120px;
+}
+
+/* Hearts animation */
+@keyframes floatUp {
+    from { transform: translateY(0); opacity: 0.8; }
+    to { transform: translateY(-200px); opacity: 0; }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+    img.main-photo { width: 180px; }
+    h1 { font-size: 22px; }
+    #yes, #no {
+        font-size: 16px;
+        padding: 8px 16px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<img src="flower.png" class="flowers">
+<img src="love.png" class="love">
+
+<div class="container">
+    <img src="us.jpg" class="main-photo">
+    <h1>Will you be my<br>Valentine?</h1>
+
+    <div class="buttons">
+        <button id="yes" onclick="yesClicked()">evt askim</button>
+        <button id="no" onclick="noClicked()">hyr</button>
+    </div>
+</div>
+
+<script>
+let yesSize = 20;
+let noClicks = 0;
+
+function noClicked() {
+    noClicks++;
+    yesSize += 10;
+    document.getElementById("yes").style.fontSize = yesSize + "px";
+    createHeart();
+
+    if (noClicks >= 5) {
+        document.getElementById("no").style.display = "none";
+    }
+}
+
+function yesClicked() {
+    document.body.innerHTML = `
+        <div style="text-align:center; color:white;">
+            <h1>💖 Askiummm! 💖</h1>
+            <p>Tesekkur Ederim 🥰</p>
+        </div>
+    `;
+}
+
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.innerHTML = "❤️";
+    heart.style.position = "absolute";
+    heart.style.left = Math.random() * window.innerWidth + "px";
+    heart.style.bottom = "0px";
+    heart.style.fontSize = "24px";
+    heart.style.animation = "floatUp 3s linear forwards";
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 3000);
+}
+</script>
+
+</body>
+</html>
